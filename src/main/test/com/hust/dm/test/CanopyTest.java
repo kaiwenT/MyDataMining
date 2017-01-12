@@ -5,6 +5,7 @@ import java.util.List;
 import com.hust.dm.util.CosSimilarity;
 import com.hust.dm.util.TFIDFConverter;
 import com.hust.dm.util.Text2List;
+import com.hust.dm.util.Threshold;
 import com.hust.dm.util.WordSegment;
 
 import org.junit.Test;
@@ -42,10 +43,14 @@ public class CanopyTest {
 	public void canopy(){
 		//初始化原始文本  + 分词
 //		initSeglist();
+		/**
+		从文件中读取文本，保存到List里
+		**/
 		Text2List t2l = new Text2List();
 		t2l.read();
 		datalist = t2l.getDataList();
 		seglist = t2l.getSegList();
+		 
 //		seglist = init();
 		//初始化canopy阈值
 		double threshold = 0.16f;
@@ -55,6 +60,11 @@ public class CanopyTest {
 		//向量转换
 		TFIDFConverter converter = new TFIDFConverter();
 		vectors = converter.convert(seglist);
+		
+		//计算阈值
+		double thre = new Threshold().getThreshold(vectors);
+		System.out.println("计算的阈值："+thre);
+		threshold = thre;
 		//
 		showVectors();
 		//canopy算法
@@ -162,7 +172,7 @@ public class CanopyTest {
 		String str6 = "最高检:凡暴力伤医案一律列为重大敏感案件";
 		String str7 = "黑龙江省长在北京会见刘士余：希望得到证监会支持";
 		String str8 = "赴日游客带走酒店马桶盖引热议";
-		
+				
 		seglist.add(ws.parse(str1));
 		seglist.add(ws.parse(str4));
 		seglist.add(ws.parse(str5));
@@ -208,7 +218,7 @@ public class CanopyTest {
 	 * 显示聚类结果
 	 */
 	public void showResult(){
-//		System.out.println("resultIndex size:"+resultIndex.size());
+		System.out.println("Canopy个数:"+resultIndex.size());
 		for(int i = 0 ; i < resultIndex.size() ; i++){
 			List<Integer> tmpIndex = resultIndex.get(i);
 			for(int j = 0 ; j < tmpIndex.size() ; j++){

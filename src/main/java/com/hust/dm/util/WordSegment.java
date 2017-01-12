@@ -3,16 +3,13 @@ package com.hust.dm.util;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.ansj.domain.Result;
 import org.ansj.domain.Term;
 import org.ansj.recognition.impl.FilterRecognition;
-import org.ansj.splitWord.analysis.DicAnalysis;
 import org.ansj.splitWord.analysis.ToAnalysis;
 
 public class WordSegment {

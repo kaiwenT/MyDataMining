@@ -33,7 +33,7 @@ public class TFIDFConverter {
 		for(String[] strs : seglist){
 			double[] vector = new double[vectorBase.size()];//= vectors.get(seglist.indexOf(strs));
 			for(String s : strs){
-				//
+				//计算每个词的TFIDF值
 				double TF = occurTimes(s, strs) / strs.length;
 				double IDF = Math.log( seglist.size() / existFileNums(s, seglist) );
 				vector[vectorBase.indexOf(s)] = TF * IDF;
