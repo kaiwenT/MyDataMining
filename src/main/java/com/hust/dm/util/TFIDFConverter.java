@@ -12,13 +12,16 @@ public class TFIDFConverter {
 	
 	public void initVectorBase(List<String[]> seglist){
 		vectorBase = new ArrayList<String>();
+		System.out.println("vectorBase:");
 		for(String[] strs : seglist){
 			for(String s : strs){
 				if(!vectorBase.contains(s)){
 					vectorBase.add(s);
+					System.out.print(s+" ");
 				}
 			}
 		}
+		System.out.println();
 	}
 	
 	
@@ -32,7 +35,7 @@ public class TFIDFConverter {
 			for(String s : strs){
 				//
 				double TF = occurTimes(s, strs) / strs.length;
-				double IDF = Math.log(seglist.size() / (existFileNums(s, seglist) + 1));
+				double IDF = Math.log( seglist.size() / existFileNums(s, seglist) );
 				vector[vectorBase.indexOf(s)] = TF * IDF;
 			}
 			vectors.add(vector);

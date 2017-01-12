@@ -16,14 +16,15 @@ public class CosSimilarity {
 	public double module(double[] v){
 		double m = 0;		
 		for(int i = 0 ; i < v.length; i++){
-			m += v[i] * v[i];
+			m += Math.pow(v[i],2);//v[i] * v[i];
 		}		
 		return Math.sqrt(m);
 	}
 
 	public double calculate(double[] v1, double[] v2){
 		double sim = 0;		
-		sim = Math.abs(multiply(v1, v2)) / module(v1) * module(v2);		
+		sim = Math.abs(multiply(v1, v2)) / (module(v1) * module(v2));		
+		
 		return sim;
 	}
 	
@@ -33,6 +34,7 @@ public class CosSimilarity {
 		for(double[] v : tmpVectors){
 			sim += calculate(vector,v);
 		}
+//		System.out.println("sim:"+sim / tmpVectors.size());
 		return sim / tmpVectors.size();
 	}
 
