@@ -62,11 +62,13 @@ public class CanopyTest {
 		vectors = converter.convert(seglist);
 		
 		//计算阈值
-		double thre = new Threshold().getThreshold(vectors);
+		Threshold t = new Threshold(vectors);
+		double thre = t.getThreshold();
 		System.out.println("计算的阈值："+thre);
-		threshold = thre;
+		System.out.println("阈值范围：["+t.getMin()+","+t.getMax()+"]");
+		threshold = 0;
 		//
-		showVectors();
+//		showVectors();
 		//canopy算法
 		resultIndex = new ArrayList<List<Integer>>();
 		List<Integer> tmpIndex = null;
