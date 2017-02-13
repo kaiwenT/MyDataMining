@@ -22,7 +22,13 @@ public class CosSimilarity {
 	}
 
 	public double calculate(double[] v1, double[] v2){
-		double sim = 0;		
+		//如果两个向量中有零向量，则返回0
+		if(module(v1) == 0 || module(v2) == 0){
+			return 0;
+		}
+		
+		double sim = 0;	
+		
 		sim = Math.abs(multiply(v1, v2)) / (module(v1) * module(v2));		
 		
 		return sim;

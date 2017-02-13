@@ -22,6 +22,7 @@ public class TFIDFConverter {
 			}
 		}
 		System.out.println();
+		System.out.println("vectors size:" + vectorBase.size());
 	}
 	
 	
