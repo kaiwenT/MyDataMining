@@ -21,20 +21,22 @@ public class Text2List {
 		
         File file = new File(PATH);
         InputStreamReader isr;
+        BufferedReader bf = null;
 		try {
 			isr = new InputStreamReader(
-			        new FileInputStream(file),"GBK");
-		
-        BufferedReader bf = new BufferedReader(isr);
- 
-        String words = null;
-        WordSegment ws = new WordSegment();
-        while ((words = bf.readLine()) != null) {
-        	words = words.trim();
-        	dataList.add(words);
-        	segList.add(ws.parse(words));
-        }
-		
+				        new FileInputStream(file),"GBK");
+			
+	        bf = new BufferedReader(isr);
+	 
+	        String words = null;
+	        WordSegment ws = new WordSegment();
+	        while ((words = bf.readLine()) != null) {
+	        	words = words.trim();
+	        	dataList.add(words);
+	        	segList.add(ws.parse(words));
+	        }
+	        bf.close();
+			isr.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

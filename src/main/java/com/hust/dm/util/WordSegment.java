@@ -90,7 +90,7 @@ public class WordSegment {
 	            stopword = stopword.trim();
 	            list.add(stopword);
 	        }
-	 
+	        bf.close();
 	        return list;
 	    }
 }
