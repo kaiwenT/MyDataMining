@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.hust.dm.util.CosSimilarity;
+import com.hust.dm.util.Excel2List;
 import com.hust.dm.util.TFIDFConverter;
 import com.hust.dm.util.Text2List;
 import com.hust.dm.util.Threshold;
@@ -44,18 +45,25 @@ public class CanopyTest {
 		//初始化原始文本  + 分词
 //		initSeglist();
 		/**
-		从文件中读取文本，保存到List里
+		从文本文件中读取文本，保存到List里
 		**/
-		Text2List t2l = new Text2List();
-		t2l.read();
-		datalist = t2l.getDataList();
-		seglist = t2l.getSegList();
+//		Text2List t2l = new Text2List();
+//		t2l.read();
+//		datalist = t2l.getDataList();
+//		seglist = t2l.getSegList();
+		/**
+		从Excel文件中读取文本，保存到List里
+		**/
+		Excel2List e2l = new Excel2List();
+		e2l.read("E:\\本果数据1.xlsx");//test
+		datalist = e2l.getDataList();
+		seglist = e2l.getSegList();
 		 
 //		seglist = init();
 		//初始化canopy阈值
 		double threshold = 0.16f;
 		//显示分词的原始文本
-		showSeglist();
+//		showSeglist();
 		
 		//向量转换
 		TFIDFConverter converter = new TFIDFConverter();
@@ -64,9 +72,9 @@ public class CanopyTest {
 		//计算阈值
 		Threshold t = new Threshold(vectors);
 		double thre = t.getThreshold();
-		System.out.println("计算的阈值："+thre);
-		System.out.println("阈值范围：["+t.getMin()+","+t.getMax()+"]");
-		threshold = 0;
+		System.out.println("计算的平均阈值："+thre);
+//		System.out.println("阈值范围：["+t.getMin()+","+t.getMax()+"]");
+		threshold = thre;
 		//
 //		showVectors();
 		//canopy算法
@@ -91,7 +99,6 @@ public class CanopyTest {
 				//得到第j个类的向量组
 				List<double[]> tmpVectors = getTmpVector(resultIndex.get(j));
 				CosSimilarity sim = new CosSimilarity();
-//				System.out.println("sim:"+sim.calculate(vector,tmpVectors));
 				//计算向量与已分的类的向量平均值是否大于阈值，大于则添加到该类
 				if(sim.calculate(vector,tmpVectors) > threshold){
 					
@@ -112,8 +119,7 @@ public class CanopyTest {
 				resultIndex.add(tmpIndex);
 			}
 		}
-//		System.out.println("tmpIndex.size:"+tmpIndex.size());
-//		System.out.println("resultIndex.size:"+resultIndex.size());
+
 		//显示聚类结果
 		showResult();
 	}	
