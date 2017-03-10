@@ -22,7 +22,7 @@ public class CosSimilarity {
 	}
 
 	public double calculate(double[] v1, double[] v2){
-		//Èç¹ûÁ½¸öÏòÁ¿ÖĞÓĞÁãÏòÁ¿£¬Ôò·µ»Ø0
+		//å¦‚æœä¸¤ä¸ªå‘é‡ä¸­æœ‰é›¶å‘é‡ï¼Œåˆ™è¿”å›0
 		if(module(v1) == 0 || module(v2) == 0){
 			return 0;
 		}

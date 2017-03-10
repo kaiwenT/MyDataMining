@@ -34,7 +34,7 @@ public class TFIDFConverter {
 		for(String[] strs : seglist){
 			double[] vector = new double[vectorBase.size()];//= vectors.get(seglist.indexOf(strs));
 			for(String s : strs){
-				//¼ÆËãÃ¿¸ö´ÊµÄTFIDFÖµ
+				//è®¡ç®—æ¯ä¸ªè¯çš„TFIDFå€¼
 				double TF = occurTimes(s, strs) / strs.length;
 				double IDF = Math.log( seglist.size() / existFileNums(s, seglist) );
 				vector[vectorBase.indexOf(s)] = TF * IDF;

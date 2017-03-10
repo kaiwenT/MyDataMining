@@ -15,7 +15,7 @@ import org.ansj.splitWord.analysis.ToAnalysis;
 public class WordSegment {
 
 	/**
-	 * ÖĞÎÄ·Ö´Ê
+	 * ä¸­æ–‡åˆ†è¯
 	 * 
 	 * @param str
 	 * @return
@@ -29,7 +29,7 @@ public class WordSegment {
 //
 //		setFilter(filter);
 
-//		Result modifResult = res.recognition(filter); // ¹ıÂË·Ö´Ê½á¹û
+//		Result modifResult = res.recognition(filter); // è¿‡æ»¤åˆ†è¯ç»“æœ
 		List<String> list = new ArrayList<String>();
 		List<Term> parse = res.getTerms();
 		List<String> list_c = null;
@@ -68,12 +68,12 @@ public class WordSegment {
 	}
 
 	public void setFilter(FilterRecognition filter) {
-		filter.insertStopNatures("uj"); // ¹ıÂË´ÊĞÔ
+		filter.insertStopNatures("uj"); // è¿‡æ»¤è¯æ€§
 		filter.insertStopNatures("ul");
 		filter.insertStopNatures("null");
 
-		// filter.insertStopWord("ÎÒ"); //¹ıÂËµ¥´Ê
-		// filter.insertStopRegex("Ğ¡.*?"); //Ö§³ÖÕıÔò±í´ïÊ½
+		// filter.insertStopWord("æˆ‘"); //è¿‡æ»¤å•è¯
+		// filter.insertStopRegex("å°.*?"); //æ”¯æŒæ­£åˆ™è¡¨è¾¾å¼
 	}
 
 	 public List<String> readStopWord(String path) throws Exception {

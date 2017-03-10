@@ -13,27 +13,25 @@ import org.junit.Test;
 
 public class CanopyTest {
 
-	//Ô­Ê¼ÎÄ±¾
+	//åŸå§‹æ–‡æœ¬
 	private List<String> datalist;
-	//·Ö´ÊºóµÄÎÄ±¾
+	//åˆ†è¯åçš„æ–‡æœ¬
 	private List<String[]> seglist;
 	
-	//Ô­Ê¼ÎÄ±¾¶ÔÓ¦ÏòÁ¿
+	//åŸå§‹æ–‡æœ¬å¯¹åº”å‘é‡
 	private List<double[]> vectors;
 	
-	//¾ÛÀà½á¹û¶ÔÓ¦µÄÏÂ±ê
+	//èšç±»ç»“æœå¯¹åº”çš„ä¸‹æ ‡
 	private List<List<Integer>> resultIndex;
-	//
-//	private List<List<double[]>> resultVector;
-	
+
 	/**
-	 * ·Ö´Ê
+	 * åˆ†è¯
 	 */
 	@Test
 	public void wordSegment(){
-		String str = "Àî¿ËÇ¿»á¼û¶ÅÌØ¶û£ºÄÏº£ÎÊÌâ²»ÊÇÖĞ·Æ¹ØÏµÈ«²¿";
-//		String str = "°¢Àï°Í°ÍÓÚ2017Äê12ÔÂ16ÈÕÔÚ¸£ÖİÊĞº£Ï¿¹ú¼Ê»áÒéÖĞĞÄ¾Ù°ì¡°ÏØÓòµçÉÌ·¢Õ¹¸ß·åÂÛÌ³ôß2017°¢ÀïÄê»õ½ÚÆô¶¯ÒÇÊ½¡±£¬±¾´ÎÏØÓòµçÉÌ·¢Õ¹ÂÛÌ³ÊÇÎÒ¹ú¸÷¸öÏØÓòÕş¸®½»Á÷µÄ×î¸ßÆ½Ì¨£¬Ò²ÊÇ°¢Àï°Í°Í¼¯ÍÅÔÚÅ©´åµçÉÌÁìÓò·¢Õ¹µÄÒ»´Î¼¯ÖĞ³ÊÏÖ¡£";
-//		String str = "360¹«Ë¾¡°¶´Ï¤´ºÔË¡¢ÖúÄú»Ø¼Ò¡ª¡ª2017Äê´ºÔË´óÊı¾İ·¢²¼»á¡±ÕıÊ½ÔÚ¾©ÕÙ¿ª¡£360Ğ¯ÊÖĞ¯³Ì¡¢È¥ÄÄ¶ù¡¢´óÖÚµãÆÀ¡¢¿µ»ÔÂÃÓÎµÈºÏ×÷»ï°éÒÔ¼°È«¹úÖ÷Á÷Ã½Ìå¹²Í¬³öÏ¯ÁË±¾´Î»î¶¯¡£»î¶¯ÏÖ³¡£¬360ä¯ÀÀÆ÷·¢²¼ÁË¡¶2017Äê´ºÔËÔ¤²â±¨¸æ¡·£¬Í¬Ê±ÕıÊ½ÉÏÏßÁË¡°360ÊÖ»úä¯ÀÀÆ÷ÇÀÆ±×¨°æ¡±ºÍ¡°´ºÔË´óÊı¾İ¿ÉÊÓ»¯µØÍ¼ÏµÍ³¡±£¬»ùÓÚ´óÊı¾İ¶Ô´ºÔËĞÎÊÆ½øĞĞÁËÉî²ã´Î¡¢È«·½Î»µÄ½â¶Á";
+		String str = "æå…‹å¼ºä¼šè§æœç‰¹å°”ï¼šå—æµ·é—®é¢˜ä¸æ˜¯ä¸­è²å…³ç³»å…¨éƒ¨";
+//		String str = "é˜¿é‡Œå·´å·´äº2017å¹´12æœˆ16æ—¥åœ¨ç¦å·å¸‚æµ·å³¡å›½é™…ä¼šè®®ä¸­å¿ƒä¸¾åŠâ€œå¿åŸŸç”µå•†å‘å±•é«˜å³°è®ºå›æš¨2017é˜¿é‡Œå¹´è´§èŠ‚å¯åŠ¨ä»ªå¼â€ï¼Œæœ¬æ¬¡å¿åŸŸç”µå•†å‘å±•è®ºå›æ˜¯æˆ‘å›½å„ä¸ªå¿åŸŸæ”¿åºœäº¤æµçš„æœ€é«˜å¹³å°ï¼Œä¹Ÿæ˜¯é˜¿é‡Œå·´å·´é›†å›¢åœ¨å†œæ‘ç”µå•†é¢†åŸŸå‘å±•çš„ä¸€æ¬¡é›†ä¸­å‘ˆç°ã€‚";
+//		String str = "360å…¬å¸â€œæ´æ‚‰æ˜¥è¿ã€åŠ©æ‚¨å›å®¶â€”â€”2017å¹´æ˜¥è¿å¤§æ•°æ®å‘å¸ƒä¼šâ€æ­£å¼åœ¨äº¬å¬å¼€ã€‚360æºæ‰‹æºç¨‹ã€å»å“ªå„¿ã€å¤§ä¼—ç‚¹è¯„ã€åº·è¾‰æ—…æ¸¸ç­‰åˆä½œä¼™ä¼´ä»¥åŠå…¨å›½ä¸»æµåª’ä½“å…±åŒå‡ºå¸­äº†æœ¬æ¬¡æ´»åŠ¨ã€‚æ´»åŠ¨ç°åœºï¼Œ360æµè§ˆå™¨å‘å¸ƒäº†ã€Š2017å¹´æ˜¥è¿é¢„æµ‹æŠ¥å‘Šã€‹ï¼ŒåŒæ—¶æ­£å¼ä¸Šçº¿äº†â€œ360æ‰‹æœºæµè§ˆå™¨æŠ¢ç¥¨ä¸“ç‰ˆâ€å’Œâ€œæ˜¥è¿å¤§æ•°æ®å¯è§†åŒ–åœ°å›¾ç³»ç»Ÿâ€ï¼ŒåŸºäºå¤§æ•°æ®å¯¹æ˜¥è¿å½¢åŠ¿è¿›è¡Œäº†æ·±å±‚æ¬¡ã€å…¨æ–¹ä½çš„è§£è¯»";
 		String[] words = new WordSegment().parse(str);
 		for(String s :words){
 			System.out.print(s+" / ");
@@ -42,48 +40,48 @@ public class CanopyTest {
 	
 	@Test
 	public void canopy(){
-		//³õÊ¼»¯Ô­Ê¼ÎÄ±¾  + ·Ö´Ê
+		//åˆå§‹åŒ–åŸå§‹æ–‡æœ¬  + åˆ†è¯
 //		initSeglist();
 		/**
-		´ÓÎÄ±¾ÎÄ¼şÖĞ¶ÁÈ¡ÎÄ±¾£¬±£´æµ½ListÀï
+		ä»æ–‡æœ¬æ–‡ä»¶ä¸­è¯»å–æ–‡æœ¬ï¼Œä¿å­˜åˆ°Listé‡Œ
 		**/
 //		Text2List t2l = new Text2List();
 //		t2l.read();
 //		datalist = t2l.getDataList();
 //		seglist = t2l.getSegList();
 		/**
-		´ÓExcelÎÄ¼şÖĞ¶ÁÈ¡ÎÄ±¾£¬±£´æµ½ListÀï
+		ä»Excelæ–‡ä»¶ä¸­è¯»å–æ–‡æœ¬ï¼Œä¿å­˜åˆ°Listé‡Œ
 		**/
 		Excel2List e2l = new Excel2List();
-		e2l.read("E:\\±¾¹ûÊı¾İ1.xlsx");//test
+		e2l.read("E:\\æœ¬æœæ•°æ®1.xlsx");//test
 		datalist = e2l.getDataList();
 		seglist = e2l.getSegList();
 		 
 //		seglist = init();
-		//³õÊ¼»¯canopyãĞÖµ
+		//åˆå§‹åŒ–canopyé˜ˆå€¼
 		double threshold = 0.16f;
-		//ÏÔÊ¾·Ö´ÊµÄÔ­Ê¼ÎÄ±¾
+		//æ˜¾ç¤ºåˆ†è¯çš„åŸå§‹æ–‡æœ¬
 //		showSeglist();
 		
-		//ÏòÁ¿×ª»»
+		//å‘é‡è½¬æ¢
 		TFIDFConverter converter = new TFIDFConverter();
 		vectors = converter.convert(seglist);
 		
-		//¼ÆËããĞÖµ
+		//è®¡ç®—é˜ˆå€¼
 		Threshold t = new Threshold(vectors);
 		double thre = t.getThreshold();
-		System.out.println("¼ÆËãµÄÆ½¾ùãĞÖµ£º"+thre);
-//		System.out.println("ãĞÖµ·¶Î§£º["+t.getMin()+","+t.getMax()+"]");
+		System.out.println("è®¡ç®—çš„å¹³å‡é˜ˆå€¼ï¼š"+thre);
+//		System.out.println("é˜ˆå€¼èŒƒå›´ï¼š["+t.getMin()+","+t.getMax()+"]");
 		threshold = thre;
 		//
 //		showVectors();
-		//canopyËã·¨
+		//canopyç®—æ³•
 		resultIndex = new ArrayList<List<Integer>>();
 		List<Integer> tmpIndex = null;
 		for(int i = 0 ; i < vectors.size() ; i++){
 			double[] vector = vectors.get(i);
 			// = new ArrayList<Integer>();
-			//i = 0 Ò»¸öÀà¶¼Ã»ÓĞÊ±£¬Ö±½ÓÌí¼Ó½øresultIndex¡£
+			//i = 0 ä¸€ä¸ªç±»éƒ½æ²¡æœ‰æ—¶ï¼Œç›´æ¥æ·»åŠ è¿›resultIndexã€‚
 			if(i == 0){
 //				List<Integer> tmpIndex = resultIndex.get(i);
 				tmpIndex = new ArrayList<Integer>();
@@ -92,19 +90,19 @@ public class CanopyTest {
 				continue;
 			}
 			
-			//ÕÒµ½·ûºÏÏàËÆ¶ÈÒªÇóµÄÀàµÄ±êÖ¾
+			//æ‰¾åˆ°ç¬¦åˆç›¸ä¼¼åº¦è¦æ±‚çš„ç±»çš„æ ‡å¿—
 			boolean isFind = false;
 			
 			for(int j = 0 ; j < resultIndex.size() ; j++){
-				//µÃµ½µÚj¸öÀàµÄÏòÁ¿×é
+				//å¾—åˆ°ç¬¬jä¸ªç±»çš„å‘é‡ç»„
 				List<double[]> tmpVectors = getTmpVector(resultIndex.get(j));
 				CosSimilarity sim = new CosSimilarity();
-				//¼ÆËãÏòÁ¿ÓëÒÑ·ÖµÄÀàµÄÏòÁ¿Æ½¾ùÖµÊÇ·ñ´óÓÚãĞÖµ£¬´óÓÚÔòÌí¼Óµ½¸ÃÀà
+				//è®¡ç®—å‘é‡ä¸å·²åˆ†çš„ç±»çš„å‘é‡å¹³å‡å€¼æ˜¯å¦å¤§äºé˜ˆå€¼ï¼Œå¤§äºåˆ™æ·»åŠ åˆ°è¯¥ç±»
 				if(sim.calculate(vector,tmpVectors) > threshold){
 					
 					tmpIndex = resultIndex.get(j);
 					tmpIndex.add(i);
-					//°Ñi¼Óµ½tmpIndex£¬È»ºó´ÓresultIndexÀïÉ¾³ıµÚj¸ö£¬×îºóÌí¼ÓtmpIndexµ½resultIndex
+					//æŠŠiåŠ åˆ°tmpIndexï¼Œç„¶åä»resultIndexé‡Œåˆ é™¤ç¬¬jä¸ªï¼Œæœ€åæ·»åŠ tmpIndexåˆ°resultIndex
 					resultIndex.remove(j);
 					resultIndex.add(tmpIndex);
 					isFind = true;
@@ -112,7 +110,7 @@ public class CanopyTest {
 				}
 			}
 			
-			//ÓëÇ°ÃæµÄÀàÏàËÆ¶È¶¼²»·ûºÏÒªÇóÔòĞÂ½¨Ò»¸öÀà
+			//ä¸å‰é¢çš„ç±»ç›¸ä¼¼åº¦éƒ½ä¸ç¬¦åˆè¦æ±‚åˆ™æ–°å»ºä¸€ä¸ªç±»
 			if(!isFind){
 				tmpIndex = new ArrayList<Integer>();
 				tmpIndex.add(i);
@@ -120,7 +118,7 @@ public class CanopyTest {
 			}
 		}
 
-		//ÏÔÊ¾¾ÛÀà½á¹û
+		//æ˜¾ç¤ºèšç±»ç»“æœ
 		showResult();
 	}	
 
@@ -134,14 +132,14 @@ public class CanopyTest {
 	
 	 public List<String[]> init() {
 	        List<String[]> segList = new ArrayList<String[]>();
-	        String[] str1 = { "12Ëê", "Å®Éú", "ËŞÉá", "±íÑİ", "ÉÏµõ", "ÉíÍö", "ÊÒÓÑ", "´í¹ı", "2´Î", "Ê©¾È", "»ú»á" };
-	        String[] str2 = { "12Ëê", "Å®Éú", "ËŞÉá", "ÄÚ", "ÉÏµõ", "ÊÒÓÑ", "ÒÔÎª", "ÍæĞ¦", "´íÊ§", "Ê©¾È", "»ú»á" };
-	        String[] str3 = { "12Ëê", "×¡Ğ£", "Å®Éú", "ËŞÉá", "ÉíÍö" };
-	        String[] str4 = { "ÉÂÎ÷", "ÊÖ»ú", "Ôç±¨", "0402" };
-	        String[] str5 = { "ËÄ´¨", "Í¨±¨", "Ğ¡Ñ§", "Å®Éú", "ËÀÍö", "ÊÂ¼ş", "Ïµ", "ÒâÍâ", "ÅÅ³ı", "Ëû", "É±" };
-	        String[] str6 = { "ÉÂÎ÷", "ÊÖ»ú", "Ôç±¨", "0402" };
-	        String[] str7 = { "12Ëê", "×¡Ğ£", "Å®Éú", "ËŞÉá", "ÉíÍö" };
-	        String[] str8 = { "12Ëê", "Å®Éú", "ËŞÉá", "ÄÚ", "ÉÏµõ", "ÊÒÓÑ", "ÒÔÎª", "ÍæĞ¦", "´íÊ§", "Ê©¾È", "»ú»á" };
+	        String[] str1 = { "12å²", "å¥³ç”Ÿ", "å®¿èˆ", "è¡¨æ¼”", "ä¸ŠåŠ", "èº«äº¡", "å®¤å‹", "é”™è¿‡", "2æ¬¡", "æ–½æ•‘", "æœºä¼š" };
+	        String[] str2 = { "12å²", "å¥³ç”Ÿ", "å®¿èˆ", "å†…", "ä¸ŠåŠ", "å®¤å‹", "ä»¥ä¸º", "ç©ç¬‘", "é”™å¤±", "æ–½æ•‘", "æœºä¼š" };
+	        String[] str3 = { "12å²", "ä½æ ¡", "å¥³ç”Ÿ", "å®¿èˆ", "èº«äº¡" };
+	        String[] str4 = { "é™•è¥¿", "æ‰‹æœº", "æ—©æŠ¥", "0402" };
+	        String[] str5 = { "å››å·", "é€šæŠ¥", "å°å­¦", "å¥³ç”Ÿ", "æ­»äº¡", "äº‹ä»¶", "ç³»", "æ„å¤–", "æ’é™¤", "ä»–", "æ€" };
+	        String[] str6 = { "é™•è¥¿", "æ‰‹æœº", "æ—©æŠ¥", "0402" };
+	        String[] str7 = { "12å²", "ä½æ ¡", "å¥³ç”Ÿ", "å®¿èˆ", "èº«äº¡" };
+	        String[] str8 = { "12å²", "å¥³ç”Ÿ", "å®¿èˆ", "å†…", "ä¸ŠåŠ", "å®¤å‹", "ä»¥ä¸º", "ç©ç¬‘", "é”™å¤±", "æ–½æ•‘", "æœºä¼š" };
 	        segList.add(str8);
 	        segList.add(str8);
 	        segList.add(str8);
@@ -172,14 +170,14 @@ public class CanopyTest {
 		
 		WordSegment ws = new WordSegment();
 		
-		String str1 = "Ï°½üÆ½³öÏ¯¼ÍÄîºì¾ü³¤Õ÷Ê¤Àû80ÖÜÄê´ó»á";
-		String str2 = "³¤Õ÷Ê¤Àû80ÖÜÄê Ï°½üÆ½½²»°(È«ÎÄ)";
-		String str3 = "ÖĞ¹úÓÎ¿ÍÔÚÈÕ±¾Ë³×ßÂíÍ°¸Ç";
-		String str4 = "Àî¿ËÇ¿»á¼û·ÆÂÉ±ö×ÜÍ³¶ÅÌØ¶û";
-		String str5 = "Àî¿ËÇ¿»á¼û¶ÅÌØ¶û£ºÄÏº£ÎÊÌâ²»ÊÇÖĞ·Æ¹ØÏµÈ«²¿";
-		String str6 = "×î¸ß¼ì:·²±©Á¦ÉËÒ½°¸Ò»ÂÉÁĞÎªÖØ´óÃô¸Ğ°¸¼ş";
-		String str7 = "ºÚÁú½­Ê¡³¤ÔÚ±±¾©»á¼ûÁõÊ¿Óà£ºÏ£ÍûµÃµ½Ö¤¼à»áÖ§³Ö";
-		String str8 = "¸°ÈÕÓÎ¿Í´ø×ß¾ÆµêÂíÍ°¸ÇÒıÈÈÒé";
+		String str1 = "ä¹ è¿‘å¹³å‡ºå¸­çºªå¿µçº¢å†›é•¿å¾èƒœåˆ©80å‘¨å¹´å¤§ä¼š";
+		String str2 = "é•¿å¾èƒœåˆ©80å‘¨å¹´ ä¹ è¿‘å¹³è®²è¯(å…¨æ–‡)";
+		String str3 = "ä¸­å›½æ¸¸å®¢åœ¨æ—¥æœ¬é¡ºèµ°é©¬æ¡¶ç›–";
+		String str4 = "æå…‹å¼ºä¼šè§è²å¾‹å®¾æ€»ç»Ÿæœç‰¹å°”";
+		String str5 = "æå…‹å¼ºä¼šè§æœç‰¹å°”ï¼šå—æµ·é—®é¢˜ä¸æ˜¯ä¸­è²å…³ç³»å…¨éƒ¨";
+		String str6 = "æœ€é«˜æ£€:å‡¡æš´åŠ›ä¼¤åŒ»æ¡ˆä¸€å¾‹åˆ—ä¸ºé‡å¤§æ•æ„Ÿæ¡ˆä»¶";
+		String str7 = "é»‘é¾™æ±Ÿçœé•¿åœ¨åŒ—äº¬ä¼šè§åˆ˜å£«ä½™ï¼šå¸Œæœ›å¾—åˆ°è¯ç›‘ä¼šæ”¯æŒ";
+		String str8 = "èµ´æ—¥æ¸¸å®¢å¸¦èµ°é…’åº—é©¬æ¡¶ç›–å¼•çƒ­è®®";
 				
 		seglist.add(ws.parse(str1));
 		seglist.add(ws.parse(str4));
@@ -223,10 +221,10 @@ public class CanopyTest {
 		}
 	}
 	/**
-	 * ÏÔÊ¾¾ÛÀà½á¹û
+	 * æ˜¾ç¤ºèšç±»ç»“æœ
 	 */
 	public void showResult(){
-		System.out.println("Canopy¸öÊı:"+resultIndex.size());
+		System.out.println("Canopyä¸ªæ•°:"+resultIndex.size());
 		for(int i = 0 ; i < resultIndex.size() ; i++){
 			List<Integer> tmpIndex = resultIndex.get(i);
 			for(int j = 0 ; j < tmpIndex.size() ; j++){
