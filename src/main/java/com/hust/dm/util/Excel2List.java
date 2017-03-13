@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Excel2List {
-private List<String> dataList;
+	
+	private List<String> dataList;
 	
 	private List<String[]> segList;
 	
@@ -32,8 +33,11 @@ private List<String> dataList;
 			WordSegment ws = new WordSegment();
 			for (int i = 0; i < list.size(); i++) {
 				String[] strs = list.get(i);
-				String words = strs[3];
+				//取表格第三列文本作为数据文本
+				String words = strs[3].trim();
+				//添加到数据list
 				dataList.add(words);
+				//分词（包括去停用词）
 				segList.add(ws.parse(words));
 			}
 		} catch (Exception e) {

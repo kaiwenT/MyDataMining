@@ -16,20 +16,13 @@ public class WordSegment {
 
 	/**
 	 * 中文分词
-	 * 
+	 * 包括去停用词
 	 * @param str
 	 * @return
 	 */
 	public String[] parse(String str) {
 		Result res = ToAnalysis.parse(str);
 
-		// System.out.println(res.toStringWithOutNature());
-
-//		FilterRecognition filter = new FilterRecognition();
-//
-//		setFilter(filter);
-
-//		Result modifResult = res.recognition(filter); // 过滤分词结果
 		List<String> list = new ArrayList<String>();
 		List<Term> parse = res.getTerms();
 		List<String> list_c = null;
