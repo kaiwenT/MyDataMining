@@ -40,6 +40,7 @@ public class WordSegment {
              
             for (String str_c : list_c) {
 //            	System.out.println(str_c);
+//            	System.out.println(str_c+";"+str1);
                 if (str_c.equals(str1))
                     flag = false;
             }	             	            
@@ -75,7 +76,7 @@ public class WordSegment {
 	 
 	        File file = new File(path);
 	        InputStreamReader isr = new InputStreamReader(
-	                new FileInputStream(file),"GBK");
+	                new FileInputStream(file),"UTF-8");
 	        BufferedReader bf = new BufferedReader(isr);
 	 
 	        String stopword = null;

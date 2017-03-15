@@ -112,8 +112,7 @@ public class Canopy {
 		}
 		//获取聚类的数量
 		canopy = resultIndex.size();
-		//显示聚类结果
-		showResult();
+		
 	}	
 
 	public List<double[]> getTmpVector(List<Integer> list){
