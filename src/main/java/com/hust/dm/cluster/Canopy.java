@@ -19,10 +19,10 @@ public class Canopy {
 	//聚类结果对应的下标
 	private List<List<Integer>> resultIndex;
 
-	//	Canopy初始阈值
+	//Canopy初始阈值
 	private double threshold = 0f;
 	
-	//	聚类结果类别数量
+	//聚类结果类别数量
 	private int canopy = 0;
 	
 	public List<String> getDatalist() {
@@ -67,12 +67,12 @@ public class Canopy {
 		List<Integer> tmpIndex = null;
 		for(int i = 0 ; i < vectors.size() ; i++){
 			double[] vector = vectors.get(i);
-			// = new ArrayList<Integer>();
 			//i = 0 一个类都没有时，直接添加进resultIndex。
 			if(i == 0){
-//				List<Integer> tmpIndex = resultIndex.get(i);
+				//把第1个向量的索引添加到tmpIndex，作为第一个类
 				tmpIndex = new ArrayList<Integer>();
 				tmpIndex.add(i);
+				//把第一个类加入到resultIndex
 				resultIndex.add(tmpIndex);
 				continue;
 			}
@@ -86,12 +86,18 @@ public class Canopy {
 				CosSimilarity sim = new CosSimilarity();
 				//计算向量与已分的类的向量平均值是否大于阈值，大于则添加到该类
 				if(sim.calculate(vector,tmpVectors) > threshold){
-					
+					//获取待比较的那个类的所有元素的索引， 存放在tmpIndex
 					tmpIndex = resultIndex.get(j);
+					
+					//把i(对应向量的索引值)加入到tmpIndex
 					tmpIndex.add(i);
-					//把i加到tmpIndex，然后从resultIndex里删除第j个，最后添加tmpIndex到resultIndex
+					
+					//从resultIndex里删除旧的待比较的那个类
 					resultIndex.remove(j);
+					
+					//添加加入了i的新类到resultIndex
 					resultIndex.add(tmpIndex);
+					//已加入相似类，退出当前循环
 					isFind = true;
 					break;
 				}
@@ -104,7 +110,7 @@ public class Canopy {
 				resultIndex.add(tmpIndex);
 			}
 		}
-
+		//获取聚类的数量
 		canopy = resultIndex.size();
 		//显示聚类结果
 		showResult();
