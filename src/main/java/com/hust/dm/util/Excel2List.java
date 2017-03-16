@@ -34,7 +34,7 @@ public class Excel2List {
 			for (int i = 0; i < list.size(); i++) {
 				String[] strs = list.get(i);
 				//取表格第三列文本作为数据文本
-				String words = strs[3].trim();
+				String words = strs[1].trim();
 				//添加到数据list
 				dataList.add(words);
 				//分词（包括去停用词）
