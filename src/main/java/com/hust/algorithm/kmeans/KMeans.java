@@ -72,9 +72,11 @@ public class KMeans {
 			double maxSim = 0f;
 			int tmpIndex = 0;			
 			//新中心点
-			newcenters = centers;			
+			newcenters = centers;
+			ClusterUtil.showVectors(newcenters);
 			//开始迭代
-			while(iterTimes > 0){				
+			while(iterTimes > 0){	
+				System.out.println("迭代"+iterTimes);
 				iterTimes--;
 				//遍历所有向量，
 				for(int i = 0 ; i < vectors.size() ; i++){
@@ -87,7 +89,8 @@ public class KMeans {
 							maxSim = cosDistance.caculate(vector, newcenters.get(j));
 							tmpIndex = j;
 						}
-					}					
+					}
+					System.out.println(""+maxSim);
 					//把文本向量集中的每一个向量对应的索引加入最近的类簇中心集合中
 					resultIndex.get(tmpIndex).add(i);
 					
@@ -100,10 +103,12 @@ public class KMeans {
 						sum = VectorUtil.add(sum, vectors.get(j));
 					}
 					newcenters.set(i, VectorUtil.center(sum,cluster.size()));
-				}				
+				}
+				ClusterUtil.showVectors(newcenters);
 				//判断新簇中心相对于旧中心移动的距离是否在条件内
 				if(!centerMove(centers, newcenters)){
 					centers = newcenters;
+					System.out.println("中心不变");
 					break;
 				}				
 				//形成新的类簇中心

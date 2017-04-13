@@ -3,7 +3,7 @@ package com.hust.algorithm.fpgrowth;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TreeNode {
+public class TreeNode implements Comparable<TreeNode>{
 	//
 	private String name;
 	//
@@ -30,18 +30,31 @@ public class TreeNode {
 		this.count += num;
 	}
 	
+	/**
+	 * 添加一个子节点
+	 * @param c
+	 */
+	public void addChild(TreeNode c){
+		this.children.add(c);
+	}
+	/**
+	 * 以树形打印本节点及子节点信息
+	 */
 	public void disp(){
 		printSpace(ind);
 		System.out.println(this.name + " " + this.count);
-		for(){
-			
+		ind++;
+		for(TreeNode child : this.children){			
+			child.disp();
 		}
+		ind--;
 	}
 	public void printSpace(int n){
 		StringBuilder sb = new StringBuilder();
 		for(int i = 0 ; i < n ; i++){
 			sb.append(" ");
 		}
+		System.out.print(sb);
 	}
 	public String getName() {
 		return name;
@@ -81,6 +94,12 @@ public class TreeNode {
 
 	public void setChildren(List<TreeNode> children) {
 		this.children = children;
+	}
+
+	@Override
+	public int compareTo(TreeNode t) {
+		// 重写比较方法
+		return 0;
 	}
 	
 	
