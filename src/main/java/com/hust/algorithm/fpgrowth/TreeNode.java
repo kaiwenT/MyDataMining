@@ -37,6 +37,24 @@ public class TreeNode implements Comparable<TreeNode>{
 	public void addChild(TreeNode c){
 		this.children.add(c);
 	}
+	
+	/**
+	 * 判断该节点存不存在name的子节点
+	 * @param name
+	 * @return
+	 */
+	public int hasChild(String name){
+		if(name == null || name.equals("")){
+			return -1;
+		}			
+		for(TreeNode t : children){
+			if(name.equals(t.getName())){
+				return children.indexOf(t);
+			}
+		}
+		return -1;
+	}
+	
 	/**
 	 * 以树形打印本节点及子节点信息
 	 */

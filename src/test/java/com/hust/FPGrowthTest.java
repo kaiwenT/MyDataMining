@@ -19,4 +19,9 @@ public class FPGrowthTest{
 		p.getChildren().add(c2);
 		sj.disp();
 	}
+	
+	@Test
+	public void testCreateTree(){
+		List<>
+	}
 }
