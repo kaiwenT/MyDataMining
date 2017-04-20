@@ -8,7 +8,7 @@ public class Config {
 	//用户词表的存放路径
 	public static String userWordsPath = "src/main/java/properties/userwords.txt";
 	//Canopy聚类结果文件路径
-	public static String CANOPY_RESULT_PATH = "D:/cluster/canopyresult/";
+	public static String CANOPY_RESULT_PATH = "E:/测试数据/聚类/Canopy结果/";
 	//KMeans聚类结果文件路径
-	public static String KMEANS_RESULT_PATH = "D:/cluster/kmeansresult/";
+	public static String KMEANS_RESULT_PATH = "E:/测试数据/聚类/KMeans结果/";
 }

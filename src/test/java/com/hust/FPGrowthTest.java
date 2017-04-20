@@ -1,7 +1,12 @@
 package com.hust;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import org.junit.Test;
 
+import com.hust.algorithm.fpgrowth.FPGrowth;
 import com.hust.algorithm.fpgrowth.TreeNode;
 
 public class FPGrowthTest{
@@ -22,6 +27,32 @@ public class FPGrowthTest{
 	
 	@Test
 	public void testCreateTree(){
-		List<>
+		String[][] simpData = {
+				{"e","m","q","s","t","y","x","z"},
+				{"x","s","r","o","n"},
+				{"s","u","t","w","v","y","x","z"},
+				{"q","p","r","t","y","x","z"},
+				{"h","r","z","j","p"},				
+				{"z"}				
+				};
+//		String[][] simpData = {
+//				{"f","a","c","d","g","i","m","p"},
+//				{"a","b","c","f","l","m","o"},
+//				{"b","f","h","j","o"},
+//				{"b","c","k","s","p"},
+//				{"a","f","c","e","l","p","m","n"}};
+		HashMap<List<String>,Integer> dataSet = new HashMap<>();
+		for(String[] items : simpData){
+			List<String> list = new ArrayList<>();
+			for(String s : items){
+				list.add(s);
+			}
+			dataSet.put(list, 1);
+		}
+		
+		FPGrowth fpgrowth = new FPGrowth(dataSet,3);
+		fpgrowth.createTree();
+		fpgrowth.getRetTree().disp();
 	}
+	
 }

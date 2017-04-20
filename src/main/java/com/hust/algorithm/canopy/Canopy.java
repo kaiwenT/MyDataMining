@@ -53,6 +53,7 @@ public class Canopy {
 			
 			for(int j = 0 ; j < resultIndex.size() ; j++){
 				//计算向量与已分的类的向量平均值是否大于阈值，大于则添加到该类
+				System.out.println("文本"+(i+1)+"与类"+(j+1)+"的相似度："+cosDistance.getDistance(i, resultIndex.get(j)));
 				if(cosDistance.getDistance(i, resultIndex.get(j)) > T){
 					//获取待比较的那个类的所有元素的索引， 存放在tmpIndex
 					tmpIndex = resultIndex.get(j);

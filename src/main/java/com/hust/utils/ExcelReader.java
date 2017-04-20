@@ -132,7 +132,7 @@ public class ExcelReader {
 
 				if (row.getCell(index) != null) {
 					row.getCell(index).setCellType(Cell.CELL_TYPE_STRING);
-					if(!content.contains(row.getCell(index).getStringCellValue()))
+//					if(!content.contains(row.getCell(index).getStringCellValue()))
 						content.add(row.getCell(index).getStringCellValue());
 				} else {
 					content.add("");

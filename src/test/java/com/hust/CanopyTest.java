@@ -21,11 +21,11 @@ public class CanopyTest{
 	public static void main(String[] args) {
 		start = System.currentTimeMillis();
 		//读取原始数据
-		List<String> dataList = ExcelReader.read("D:/cluster/原始数据.xls",0);
+		List<String> dataList = ExcelReader.read("E:/测试数据/四川项目数据/PPT演示数据.xlsx",2);
 		
 //		end = System.currentTimeMillis();
 //		System.out.println("读数据耗时："+(end-start));
-//		ClusterUtil.showDatalist(dataList);
+		ClusterUtil.showDatalist(dataList);
 		//分词
 		AnsjSegmentation ansj = new AnsjSegmentation();
 		ansj.setWordList(dataList);
@@ -33,16 +33,16 @@ public class CanopyTest{
 		
 		//得到分词后的List集合
 		List<String[]> seglist = ansj.getSegList(); 
-//		ClusterUtil.showSeglist(seglist);
+		ClusterUtil.showSeglist(seglist);
 		
 		//向量转换
 		TFIDFConvertor convertor = new TFIDFConvertor(seglist);
 		List<double[]> vectors = convertor.getVector();
 		Canopy canopy = new Canopy();
 		canopy.setVectors(vectors);
-
+		ClusterUtil.showVectors(vectors);
 		//设置阈值
-		canopy.setT(0.035);
+		canopy.setT(0.4);
 //		start = System.currentTimeMillis();
 		//进行Canopy聚类
 		canopy.cluster();

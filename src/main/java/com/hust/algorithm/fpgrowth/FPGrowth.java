@@ -19,7 +19,7 @@ public class FPGrowth {
 	private TreeNode retTree;
 	
 	
-	public FPGrowth(int minSup, HashMap<List<String>,Integer> dataSet) {
+	public FPGrowth(HashMap<List<String>,Integer> dataSet, int minSup) {
 		super();
 		this.minSup = minSup;
 		this.dataSet = dataSet;
@@ -43,9 +43,9 @@ public class FPGrowth {
 		for(List<String> trans : dataSet.keySet()){
 			for(String term : trans){
 				int index = indexOf(term);
-				if(index > 0){
+				if(index >= 0){
 					HeadNode h = headTable.get(index);
-					h.setCount(h.getCount() + 1);
+					h.setCount(h.getCount() + dataSet.get(trans));
 				}else{
 					HeadNode e = new HeadNode(term, 1, null);
 					headTable.add(e);
@@ -53,9 +53,10 @@ public class FPGrowth {
 			}
 		}
 		//移除不满足最小支持度的元素项
-		for(HeadNode t : headTable){
-			if(t.getCount() < minSup){
-				headTable.remove(t);
+		for(int i = 0 ; i < headTable.size() ; i++){
+			if(headTable.get(i).getCount() < minSup){
+				headTable.remove(i);
+				i--;
 			}
 		}
 		//如果没有元素项满足要求则退出
@@ -70,7 +71,7 @@ public class FPGrowth {
 			Map<String,Integer> localD = new HashMap<>();
 			for(String item : tranSet){
 				int index = indexOf(item);
-				if(index > 0){
+				if(index >= 0){
 					localD.put(item, headTable.get(index).getCount());
 				}
 			}
@@ -83,7 +84,10 @@ public class FPGrowth {
 					@Override
 					public int compare(Entry<String, Integer> o1, Entry<String, Integer> o2) {
 						// TODO Auto-generated method stub
-						return o1.getValue() - o2.getValue();
+						if(o2.getValue() != o1.getValue()){
+							return o2.getValue() - o1.getValue();
+						}
+						return o1.getKey().compareTo(o2.getKey());
 					}
 				});
 				//
@@ -92,22 +96,23 @@ public class FPGrowth {
 		}
 	}
 	
-	public void updateTree(List<Entry<String, Integer>> items, TreeNode inTree, List<HeadNode> headTable2, Integer count){
+	public void updateTree(List<Entry<String, Integer>> items, TreeNode inTree, List<HeadNode> headerTable, Integer count){
 		int index = inTree.hasChild(items.get(0).getKey());
-		if( index > 0){
+		if( index >= 0){
 			TreeNode t = inTree.getChildren().get(index);
-			t.inc(items.get(0).getValue());
+			t.inc(count);
 		}else{
-			inTree.addChild(new TreeNode(items.get(0).getKey(),items.get(0).getValue(), inTree));
-			if(headTable.get(0).getHead() == null){
-				headTable.get(0).setHead(inTree.getChildren().get(index));
+			inTree.addChild(new TreeNode(items.get(0).getKey(),count, inTree));
+			index = inTree.hasChild(items.get(0).getKey());
+			if(headerTable.get(0).getHead() == null){
+				headerTable.get(0).setHead(inTree.getChildren().get(index));
 			}else{
-				updateHeader(headTable.get(0).getHead(), inTree.getChildren().get(index));
+				updateHeader(headerTable.get(0).getHead(), inTree.getChildren().get(index));
 			}
 		}
 		if(items.size() > 1){
 			items.remove(0);
-			updateTree(items, inTree.getChildren().get(index), headTable,count);
+			updateTree(items, inTree.getChildren().get(index), headerTable,count);
 		}
 	}
 
@@ -118,4 +123,38 @@ public class FPGrowth {
 		}
 		head.setNodeLink(targetNode);
 	}
+
+	public List<HeadNode> getHeadTable() {
+		return headTable;
+	}
+
+	public void setHeadTable(List<HeadNode> headTable) {
+		this.headTable = headTable;
+	}
+
+	public int getMinSup() {
+		return minSup;
+	}
+
+	public void setMinSup(int minSup) {
+		this.minSup = minSup;
+	}
+
+	public HashMap<List<String>, Integer> getDataSet() {
+		return dataSet;
+	}
+
+	public void setDataSet(HashMap<List<String>, Integer> dataSet) {
+		this.dataSet = dataSet;
+	}
+
+	public TreeNode getRetTree() {
+		return retTree;
+	}
+
+	public void setRetTree(TreeNode retTree) {
+		this.retTree = retTree;
+	}
+	
+	
 }

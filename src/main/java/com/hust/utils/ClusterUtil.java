@@ -52,7 +52,7 @@ public class ClusterUtil {
 			if(tmpIndex == null && tmpIndex.size() == 0){
 				continue;	
 			}
-			System.out.println("类别"+i+":"+datalist.get(tmpIndex.get(0)));
+			System.out.println("***类别"+(i+1)+":"+datalist.get(tmpIndex.get(0))+"***");
 			for(int j = 0 ; j < tmpIndex.size() ; j++){
 				System.out.println(datalist.get(tmpIndex.get(j)));
 			}
